@@ -263,7 +263,6 @@ locals {
     }
   }
   default_deny_nsg_rules = {
-    # Begin at 9000
     "DenyVnetInbound" = {
       name                       = "DenyVnetInbound"
       priority                   = 4095
