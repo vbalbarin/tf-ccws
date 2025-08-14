@@ -195,7 +195,7 @@ locals {
       source_port_range          = "*"
     }
     "AllowSshRdpBastionClientIn" = {
-      name                       = "AllowSshRdpBastionClientIn"
+      name                       = "AllowSshRdpBastionTgtIn"
       priority                   = 2300
       direction                  = "Inbound"
       access                     = "Allow"
