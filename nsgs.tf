@@ -17,7 +17,7 @@ locals {
 
 locals {
   default_ccws_nsg_rules = {
-    # Will begin at 1000 for this set
+    # default_ccws_nsg_rules priority range [1000, 2000)
     # Inbound
     "AllowHttpsIn" = {
       name                       = "AllowHttpsIn"
@@ -122,7 +122,7 @@ locals {
 
   }
   bastion_tgt_vm_nsg_rules = {
-    # Will begin at 2000 for this set
+    # bastion_tgt_vm_nsg_rules [2000, 3000)
     "AllowSshRdpBastionSvcIn" = {
       name                       = "AllowSshRdpBastionSvcIn"
       priority                   = 2000
@@ -148,6 +148,7 @@ locals {
     }
   }
   base_bastion_nsg_rules = {
+    # base_bastion_nsg_rules [2000, 3000)
     # Inbound
     "AllowHttpsBastionIn" = {
       name                    = "AllowHttpsBastionIn"
