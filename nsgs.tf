@@ -134,7 +134,7 @@ locals {
       destination_address_prefix = "VirtualNetwork"
       source_port_range          = "*"
     }
-        # Outbound
+    # Outbound
     "AllowSshRdpBastionSvcOut" = {
       name                       = "AllowSshRdpBastionSvcOut"
       priority                   = 2050
@@ -142,7 +142,7 @@ locals {
       access                     = "Allow"
       protocol                   = "*"
       destination_port_ranges    = local.service_ports["ssh_rdp"]
-      source_address_prefix      ="VirtualNetwork"
+      source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
       source_port_range          = "*"
     }
@@ -150,14 +150,14 @@ locals {
   base_bastion_nsg_rules = {
     # Inbound
     "AllowHttpsBastionIn" = {
-      name                       = "AllowHttpsBastionIn"
-      priority                   = 2100
-      direction                  = "Inbound"
-      access                     = "Allow"
-      protocol                   = "Tcp"
-      destination_port_ranges    = local.service_ports["https"]
-      source_address_prefix      = "Internet"
-    #   destination_address_prefix = module.subnet_addrs.network_cidr_blocks["AzureBastionSubnet"]
+      name                    = "AllowHttpsBastionIn"
+      priority                = 2100
+      direction               = "Inbound"
+      access                  = "Allow"
+      protocol                = "Tcp"
+      destination_port_ranges = local.service_ports["https"]
+      source_address_prefix   = "Internet"
+      #   destination_address_prefix = module.subnet_addrs.network_cidr_blocks["AzureBastionSubnet"]
       destination_address_prefix = "*"
       source_port_range          = "*"
     }
@@ -275,7 +275,7 @@ locals {
       destination_address_prefix = "VirtualNetwork"
       source_port_range          = "*"
     }
-        "DenyVnetOutbound" = {
+    "DenyVnetOutbound" = {
       name                       = "DenyVnetOutbound"
       priority                   = 4095
       direction                  = "Outbound"
