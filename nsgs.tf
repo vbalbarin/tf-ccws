@@ -17,11 +17,10 @@ locals {
 
 locals {
   default_ccws_nsg_rules = {
-    # default_ccws_nsg_rules priority range [1000, 2000)
-    # Inbound
+    # Inbound default_ccws_nsg_rules priority range [100, 200)
     "AllowHttpsIn" = {
       name                       = "AllowHttpsIn"
-      priority                   = 1000
+      priority                   = 110
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -32,7 +31,7 @@ locals {
     }
     "AllowSshVnetVnetIn" = {
       name                       = "AllowSshVnetVnetIn"
-      priority                   = 1050
+      priority                   = 120
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -43,7 +42,7 @@ locals {
     }
     "AllowAllComputeComputeIn" = {
       name                       = "AllowAllComputeComputeIn"
-      priority                   = 1100
+      priority                   = 130
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -54,7 +53,7 @@ locals {
     }
     "AllowCycleClientComputeIn" = {
       name                       = "AllowCycleClientComputeIn"
-      priority                   = 1150
+      priority                   = 140
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -63,10 +62,10 @@ locals {
       destination_address_prefix = module.subnet_addrs.network_cidr_blocks["ccw-cyclecloud-subnet"]
       source_port_range          = "*"
     }
-    # Outbound
+    # Outbound default_ccws_nsg_rules priority range [100, 200)
     "AllowHttpsOut" = {
       name                       = "AllowHttpsOut"
-      priority                   = 1000
+      priority                   = 110
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -77,7 +76,7 @@ locals {
     }
     "AllowSshCyclecloudComputeOut" = {
       name                       = "AllowSshCyclecloudComputeOut"
-      priority                   = 1050
+      priority                   = 120
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -88,7 +87,7 @@ locals {
     }
     "AllowCycleClientComputeOut" = {
       name                       = "AllowCycleClientComputeOut"
-      priority                   = 1100
+      priority                   = 130
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -99,7 +98,7 @@ locals {
     }
     "AllowAllComputeComputeOut" = {
       name                       = "AllowAllComputeComputeOut"
-      priority                   = 1150
+      priority                   = 140
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -110,7 +109,7 @@ locals {
     }
     "AllowInternetOutBound" = {
       name                       = "AllowInternetOutBound"
-      priority                   = 1950
+      priority                   = 150
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -122,10 +121,10 @@ locals {
 
   }
   bastion_tgt_vm_nsg_rules = {
-    # bastion_tgt_vm_nsg_rules [2000, 3000)
+    # Inbound bastion_tgt_vm_nsg_rules [210, 300)
     "AllowSshRdpBastionSvcIn" = {
       name                       = "AllowSshRdpBastionSvcIn"
-      priority                   = 2000
+      priority                   = 210
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -134,10 +133,10 @@ locals {
       destination_address_prefix = "VirtualNetwork"
       source_port_range          = "*"
     }
-    # Outbound
+    # Outbound bastion_tgt_vm_nsg_rules [210, 300)
     "AllowSshRdpBastionSvcOut" = {
       name                       = "AllowSshRdpBastionSvcOut"
-      priority                   = 2050
+      priority                   = 210
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "*"
@@ -148,11 +147,10 @@ locals {
     }
   }
   base_bastion_nsg_rules = {
-    # base_bastion_nsg_rules [2000, 3000)
-    # Inbound
+    # Inbound base_bastion_nsg_rules [310, 400)
     "AllowHttpsBastionIn" = {
       name                    = "AllowHttpsBastionIn"
-      priority                = 2100
+      priority                = 310
       direction               = "Inbound"
       access                  = "Allow"
       protocol                = "Tcp"
@@ -164,7 +162,7 @@ locals {
     }
     "AllowGatewayManagerBastionIn" = {
       name                       = "AllowGatewayManagerBastionIn"
-      priority                   = 2150
+      priority                   = 320
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -175,7 +173,7 @@ locals {
     }
     "AllowAzureLoadBalancerBastionIn" = {
       name                       = "AllowAzureLoadBalancerBastionIn"
-      priority                   = 2200
+      priority                   = 330
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -186,7 +184,7 @@ locals {
     }
     "AllowBastionHostCommunicationBastionIn" = {
       name                       = "AllowBastionHostCommunicationBastionIn"
-      priority                   = 2250
+      priority                   = 340
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -197,7 +195,7 @@ locals {
     }
     "AllowSshRdpBastionClientIn" = {
       name                       = "AllowSshRdpBastionTgtIn"
-      priority                   = 2300
+      priority                   = 350
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -206,10 +204,10 @@ locals {
       destination_address_prefix = module.subnet_addrs.network_cidr_blocks["AzureBastionSubnet"]
       source_port_range          = "*"
     }
-    # Outbound
+    # Outbound base_bastion_nsg_rules [310, 400)
     "AllowSshRdpBastionTgtVmOut" = {
       name                       = "AllowSshRdpBastionTgtVmOut"
-      priority                   = 2000
+      priority                   = 310
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "*"
@@ -220,7 +218,7 @@ locals {
     }
     "AllowAzureCloudBastionOut" = {
       name                       = "AllowAzureCloudBastionOut"
-      priority                   = 2100
+      priority                   = 320
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -231,7 +229,7 @@ locals {
     }
     "AllowBastionHostCommunicationBastionOut" = {
       name                       = "AllowBastionHostCommunicationBastionOut"
-      priority                   = 2200
+      priority                   = 330
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "*"
@@ -242,7 +240,7 @@ locals {
     }
     "AllowHttpBastionOut" = {
       name                       = "AllowHttpBastionOut"
-      priority                   = 2300
+      priority                   = 340
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "*"
@@ -253,7 +251,7 @@ locals {
     }
     "AllowHttpsBastionOut" = {
       name                       = "AllowHttpsBastionOut"
-      priority                   = 2400
+      priority                   = 350
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "Tcp"
