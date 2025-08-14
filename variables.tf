@@ -90,8 +90,8 @@ variable "resource_name_templates" {
     network_security_group_name = "nsg-$${workload}-$${environment}-$${location_short}-$${sequence}"
     bastion_name                = "bastion-$${workload}-$${environment}-$${location_short}-$${sequence}"
     bastion_public_ip_name      = "pip-bastion-$${workload}-$${environment}-$${location_short}-$${sequence}"
-    # nat_gateway_name                      = "nat-$${workload}-$${environment}-$${location_short}-$${sequence}"
-    # nat_gateway_public_ip_name            = "pip-nat-$${workload}-$${environment}-$${location_short}-$${sequence}"
+    nat_gateway_name                      = "nat-$${workload}-$${environment}-$${location_short}-$${sequence}"
+    nat_gateway_public_ip_name            = "pip-nat-$${workload}-$${environment}-$${location_short}-$${sequence}"
     # storage_account_private_endpoint_name = "pe-sto-$${workload}-$${environment}-$${location_short}-$${sequence}"
     # agent_compute_postfix_name            = "$${workload}-$${environment}-$${location_short}-$${sequence}"
     # container_instance_prefix_name        = "aci-$${workload}-$${environment}-$${location_short}"
@@ -110,6 +110,11 @@ variable "vnet_address_space" {
 }
 
 variable "deploy_bastion" {
+  type    = bool
+  default = true
+}
+
+variable "deploy_natgw" {
   type    = bool
   default = true
 }
