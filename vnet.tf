@@ -54,6 +54,12 @@ module "virtualnetwork" {
       network_security_group = {
         id = module.common_ccws_nsg.resource.id
       }
+      delegation = [{
+        name = "Microsoft.DBforMySQL.flexibleServers"
+        service_delegation = {
+          name = "Microsoft.DBforMySQL/flexibleServers"
+        }
+      }]
     }
     "ccw-cyclecloud-subnet" = {
       name             = "ccw-cyclecloud-subnet"
@@ -68,6 +74,12 @@ module "virtualnetwork" {
       network_security_group = {
         id = module.common_ccws_nsg.resource.id
       }
+      delegation = [{
+        name = "Microsoft.Netapp.volumes"
+        service_delegation = {
+          name = "Microsoft.Netapp/volumes"
+        }
+      }]
     }
     "AzureBastionSubnet" = {
       name             = "AzureBastionSubnet"
